@@ -1,0 +1,139 @@
+{
+    "extensionDescription": {
+        "message": "Add some features to enhance Miniflux web interface"
+    },
+    "dialogTitle": {
+        "message": "Append Feed Rule"
+    },
+    "ruleLabel": {
+        "message": "Rule:"
+    },
+    "rulePlaceholder": {
+        "message": "Enter rule"
+    },
+    "typeLabel": {
+        "message": "Type:"
+    },
+    "blockRule": {
+        "message": "Block Rule"
+    },
+    "keepRule": {
+        "message": "Keep Rule"
+    },
+    "saveButton": {
+        "message": "Save"
+    },
+    "cancelButton": {
+        "message": "Cancel"
+    },
+    "updateButton": {
+        "message": "Update Rule"
+    },
+    "configureFirst": {
+        "message": "Please configure API endpoint and key in extension settings first"
+    },
+    "getFeedError": {
+        "message": "Failed to get feed: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "updateFeedError": {
+        "message": "Failed to update feed: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "getEntriesError": {
+        "message": "Failed to get entries: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "updateEntriesError": {
+        "message": "Failed to update entries status: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "updateSuccess": {
+        "message": "Successfully updated rule and processed $COUNT$ entries",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "optionsTitle": {
+        "message": "Miniflux Enhancer Settings"
+    },
+    "apiBaseUrlLabel": {
+        "message": "Base URL"
+    },
+    "apiBaseUrlPlaceholder": {
+        "message": "e.g., https://your-miniflux-instance"
+    },
+    "apiKeyLabel": {
+        "message": "API Key"
+    },
+    "settingsSaved": {
+        "message": "Settings saved"
+    },
+    "settingsSaveError": {
+        "message": "Failed to save settings: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "settingsLoadError": {
+        "message": "Failed to load settings: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "invalidApiUrl": {
+        "message": "Invalid Base URL format"
+    },
+    "invalidApiKey": {
+        "message": "API Key is required"
+    },
+    "invalidRegex": {
+        "message": "Invalid regular expression: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "saving": {
+        "message": "Saving..."
+    },
+    "logUpdateRuleFailed": {
+        "message": "Update rule failed: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "logGetSettingsFailed": {
+        "message": "Failed to get settings: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    }
+}

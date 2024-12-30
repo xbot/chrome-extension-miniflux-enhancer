@@ -1,0 +1,64 @@
+.me-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.me-dialog-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+}
+
+.me-form-group {
+    margin: 15px 0;
+}
+
+.me-form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.me-form-group input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.me-radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+.me-dialog-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.me-dialog-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#saveRule {
+    background: #007bff;
+    color: white;
+}
+
+#cancelRule {
+    background: #6c757d;
+    color: white;
+}

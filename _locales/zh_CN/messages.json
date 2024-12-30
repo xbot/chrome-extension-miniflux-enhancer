@@ -1,0 +1,139 @@
+{
+    "extensionDescription": {
+        "message": "为 Miniflux 网页界面添加一些增强功能"
+    },
+    "dialogTitle": {
+        "message": "追加订阅源规则"
+    },
+    "ruleLabel": {
+        "message": "规则："
+    },
+    "rulePlaceholder": {
+        "message": "输入规则"
+    },
+    "typeLabel": {
+        "message": "类型："
+    },
+    "blockRule": {
+        "message": "阻止规则"
+    },
+    "keepRule": {
+        "message": "保留规则"
+    },
+    "saveButton": {
+        "message": "保存"
+    },
+    "cancelButton": {
+        "message": "取消"
+    },
+    "updateButton": {
+        "message": "更新规则"
+    },
+    "configureFirst": {
+        "message": "请先在扩展设置中配置 API 端点和密钥"
+    },
+    "getFeedError": {
+        "message": "获取订阅源失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "updateFeedError": {
+        "message": "更新订阅源失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "getEntriesError": {
+        "message": "获取条目失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "updateEntriesError": {
+        "message": "更新条目状态失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "updateSuccess": {
+        "message": "成功更新规则并处理了 $COUNT$ 个条目",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "optionsTitle": {
+        "message": "Miniflux Enhancer 设置"
+    },
+    "apiBaseUrlLabel": {
+        "message": "Miniflux 网址"
+    },
+    "apiBaseUrlPlaceholder": {
+        "message": "例如：https://your-miniflux-instance"
+    },
+    "apiKeyLabel": {
+        "message": "API 密钥"
+    },
+    "settingsSaved": {
+        "message": "设置已保存"
+    },
+    "settingsSaveError": {
+        "message": "保存设置失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "settingsLoadError": {
+        "message": "加载设置失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "invalidApiUrl": {
+        "message": "Miniflux 网址格式无效"
+    },
+    "invalidApiKey": {
+        "message": "API Key 不能为空"
+    },
+    "invalidRegex": {
+        "message": "无效的正则表达式：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "saving": {
+        "message": "保存中..."
+    },
+    "logUpdateRuleFailed": {
+        "message": "更新规则失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "logGetSettingsFailed": {
+        "message": "获取设置失败：$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    }
+}
