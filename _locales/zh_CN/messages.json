@@ -109,8 +109,8 @@
     "invalidApiKey": {
         "message": "API Key 不能为空"
     },
-    "invalidRegex": {
-        "message": "无效的正则表达式：$ERROR$",
+    "invalidJsRegex": {
+        "message": "无效的 Javascript 正则表达式：$ERROR$",
         "placeholders": {
             "error": {
                 "content": "$1"

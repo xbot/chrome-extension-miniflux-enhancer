@@ -35,9 +35,19 @@ function getLocalizedMessage(messageKey, ...args) {
         console.error('Messages not loaded');
         return messageKey;
     }
-    const message = messages[messageKey].message || chrome.i18n.getMessage(messageKey);
-    if (args.length > 0) {
-        return message.replace(/%s/g, () => args.shift());
+    let message = messages[messageKey].message || chrome.i18n.getMessage(messageKey);
+    if (args.length > 0 && message) {
+        // Handle both %s and $PLACEHOLDER$ format
+        if (messages[messageKey].placeholders) {
+            // Handle $PLACEHOLDER$ format
+            Object.keys(messages[messageKey].placeholders).forEach((placeholder, index) => {
+                const regex = new RegExp('\\$' + placeholder.toUpperCase() + '\\$', 'g');
+                message = message.replace(regex, args[index] || '');
+            });
+        } else {
+            // Handle %s format
+            message = message.replace(/%s/g, () => args.shift());
+        }
     }
     return message;
 }
@@ -165,9 +175,15 @@ function buildApiUrl(baseUrl, path) {
 async function markEntriesAsReadByRule(feedId, rule, type, settings) {
     let pattern;
     try {
-        pattern = new RegExp(rule, 'i');
+        // Check if the rule starts with (?i) and remove it if present
+        const hasIgnoreCase = rule.startsWith('(?i)');
+        const cleanRule = hasIgnoreCase ? rule.slice(4) : rule;
+        // Add 'i' flag only if (?i) was present
+        pattern = new RegExp(cleanRule, hasIgnoreCase ? 'i' : '');
     } catch (error) {
-        throw new Error(getLocalizedMessage('invalidRegex', error.message));
+        // For complicated RE2 regular expressions, print the error message and do not mark entries as read
+        console.error(getLocalizedMessage('invalidJsRegex', error.message));
+        return;
     }
 
     // Get all unread entries
@@ -272,7 +288,8 @@ async function updateFeedRule(feedId, rule, type) {
         });
         
         if (!updateResponse.ok) {
-            throw new Error(getLocalizedMessage('updateFeedError', updateResponse.statusText));
+            const responseData = await updateResponse.json();
+            throw new Error(getLocalizedMessage('updateFeedError', updateResponse.statusText || responseData.error_message || 'Unknown error'));
         }
         
         // Mark matching entries as read

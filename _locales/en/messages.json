@@ -109,8 +109,8 @@
     "invalidApiKey": {
         "message": "API Key is required"
     },
-    "invalidRegex": {
-        "message": "Invalid regular expression: $ERROR$",
+    "invalidJsRegex": {
+        "message": "Invalid Javascript regular expression: $ERROR$",
         "placeholders": {
             "error": {
                 "content": "$1"
