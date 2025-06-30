@@ -6,9 +6,9 @@ A Chrome extension to enhance Miniflux Web UI functionality.
 
 ## Features
 
-- Adds an "Update Rule" button to each entry in Miniflux's article list
-  - Supports adding block rules and keep rules
-  - Automatically processes unread entries that match the rules
+- **Update Rules**: Adds an "Update Rule" button to each entry, allowing you to add block or keep rules for a feed and automatically process matching unread entries.
+- **Thumbnails**: Displays a thumbnail for each entry in the article list. Hover over the thumbnail to see a larger preview.
+- **Custom Styling**: Adds unique CSS classes for feed and category pages (e.g., `feed-ID`, `category-ID`), making it easy to apply custom styles to specific sources.
 
 ![Update Rules](assets/introduction-01-update-rules.png)
 
@@ -31,3 +31,7 @@ A Chrome extension to enhance Miniflux Web UI functionality.
 
 - This extension only works with the official Miniflux Web UI
 - Make sure you have management permissions for the corresponding feed
+
+## Acknowledgements
+
+- The thumbnail feature is inspired by the [Miniflux thumbnails](https://greasyfork.org/en/scripts/496408-miniflux-thumbnails) script.

@@ -62,3 +62,28 @@
     background: #6c757d;
     color: white;
 }
+
+/* Thumbnail Styles */
+.entry-thumbnail {
+    float: right;
+}
+
+.entry-thumbnail img {
+    max-width: 64px;
+    max-height: 64px;
+    padding-left: 10px;
+}
+
+.enlarged-image {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.enlarged-image img {
+    max-width: 700px;
+    max-height: 700px;
+}
