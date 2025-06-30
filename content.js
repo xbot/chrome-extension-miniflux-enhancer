@@ -321,10 +321,124 @@ function addButtonToEntry(article) {
     metaIcons.appendChild(updateButton);
 }
 
+// --- Thumbnail Functions ---
+
+// Fetch entry data using history route to avoid marking as read
+async function getEntryData(entryId) {
+    const entryUrl = new URL(`/history/entry/${entryId}`, window.location.origin);
+    const response = await fetch(entryUrl, {
+        headers: { 'Content-Type': 'text/html' }
+    });
+    if (!response.ok) {
+        throw new Error(`Failed to fetch entry data for ${entryId}`);
+    }
+    const html = await response.text();
+    const parser = new DOMParser();
+    return parser.parseFromString(html, "text/html");
+}
+
+// Extract thumbnail URL from the entry's DOM
+function getThumbnailUrl(dom) {
+    // Priority 1: Enclosure image
+    const imageEnclosure = dom.querySelector('.enclosure-image img');
+    if (imageEnclosure && imageEnclosure.src) {
+        return imageEnclosure.src;
+    }
+
+    // Priority 2: First image in the content
+    const img = dom.querySelector(".entry-content img");
+    if (img && img.src) {
+        return img.src;
+    }
+    return null;
+}
+
+// Create the thumbnail element with mouseover preview
+function createThumbnailElement(thumbnailUrl) {
+    const thumbnailElement = document.createElement("div");
+    thumbnailElement.className = "entry-thumbnail";
+
+    const thumbnailImage = document.createElement("img");
+    thumbnailImage.src = thumbnailUrl;
+    thumbnailImage.alt = "Thumbnail";
+
+    const enlargedImageContainer = document.createElement("div");
+    enlargedImageContainer.className = "enlarged-image";
+
+    const enlargedImage = document.createElement("img");
+    enlargedImage.src = thumbnailUrl;
+
+    enlargedImageContainer.appendChild(enlargedImage);
+    thumbnailElement.appendChild(thumbnailImage);
+    thumbnailElement.appendChild(enlargedImageContainer);
+
+    thumbnailElement.addEventListener("mouseenter", (event) => {
+        const rect = thumbnailImage.getBoundingClientRect();
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+        const viewportHeight = window.innerHeight;
+        const isNearBottom = rect.bottom > viewportHeight / 2;
+
+        enlargedImageContainer.style.display = "block";
+        enlargedImageContainer.style.right = `${window.innerWidth - rect.left}px`;
+
+        if (isNearBottom) {
+            enlargedImageContainer.style.top = `${rect.bottom + scrollY - enlargedImageContainer.offsetHeight}px`;
+        } else {
+            enlargedImageContainer.style.top = `${rect.top + scrollY}px`;
+        }
+    });
+
+    thumbnailElement.addEventListener("mouseleave", () => {
+        enlargedImageContainer.style.display = "none";
+    });
+
+    return thumbnailElement;
+}
+
+// Add thumbnail to a single entry
+async function addThumbnailToEntry(article) {
+    // Check if thumbnail already exists
+    if (article.querySelector('.entry-thumbnail')) {
+        return;
+    }
+
+    const entryId = article.dataset.id;
+    if (!entryId) return;
+
+    try {
+        const entryData = await getEntryData(entryId);
+        const thumbnailUrl = getThumbnailUrl(entryData);
+
+        if (thumbnailUrl) {
+            const thumbnailElement = createThumbnailElement(thumbnailUrl);
+            article.insertAdjacentElement("afterbegin", thumbnailElement);
+        }
+    } catch (error) {
+        console.error(`Miniflux Enhancer: Failed to add thumbnail for entry ${entryId}`, error);
+    }
+}
+
 // Initialize
 async function init() {
     if (!isMiniflux()) {
         return;
+    }
+
+    // Add class to main element based on URL
+    const path = window.location.pathname;
+    const feedMatch = path.match(/^\/feed\/(\d+)/);
+    const categoryMatch = path.match(/^\/category\/(\d+)/);
+    const mainElement = document.querySelector('main');
+
+    if (mainElement) {
+        if (feedMatch) {
+            const feedId = feedMatch[1];
+            mainElement.classList.add(`feed-${feedId}`);
+        } else if (categoryMatch) {
+            const categoryId = categoryMatch[1];
+            mainElement.classList.add(`category-${categoryId}`);
+        }
     }
 
     // Load localized messages based on Miniflux language
@@ -336,11 +450,11 @@ async function init() {
         messages = {};
     }
 
-    // Add update rule button to each entry
+    // Process each entry
     const articles = document.querySelectorAll('article.item');
-    
     articles.forEach(article => {
         addButtonToEntry(article);
+        addThumbnailToEntry(article);
     });
     
     // Watch for new entries
@@ -349,6 +463,7 @@ async function init() {
             mutation.addedNodes.forEach((node) => {
                 if (node.nodeType === 1 && node.matches('article.item')) {
                     addButtonToEntry(node);
+                    addThumbnailToEntry(node);
                 }
             });
         });
